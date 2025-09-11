@@ -1,226 +1,298 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DVTEAM – Teknik Mengundang</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <title>Presentasi: Daftar Nama – Peta Jalan Sukses</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --gold: #ffd166;
-      --text: #f0f4f8;
-      --muted: #9aa6b8;
-      --slide-bg: #1c1f26;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
-      height: 100%;
-      margin: 0;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      background-attachment: fixed;
+      margin: 0; padding: 0;
+      width: 100%; height: 100%;
       overflow: hidden;
-      padding-bottom: env(safe-area-inset-bottom);
-      font-family: "Poppins", sans-serif;
-      color: var(--text);
+      background: #1e1b4b;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      font-size: 17px;
+      line-height: 1.7;
     }
 
-    .header {
-      position: fixed;
-      top: 15px;
-      right: 20px;
-      text-align: right;
-      font-size: 0.9rem;
-      line-height: 1.3;
-      z-index: 10;
-      color: var(--muted);
+    h1 { font-size: 3.8em; font-weight: 900; }
+    h2 { font-size: 3.2em; font-weight: 800; }
+    h3 { font-size: 2.7em; font-weight: 800; }
+    p { font-size: 1.1em; font-weight: 400; }
+
+    li {
+      font-size: 1.15em;
+      font-weight: 600;
+      background: rgba(255, 255, 0, 0.25);
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-block;
     }
-    .header .brand {
-      font-weight: 700;
-      color: var(--gold);
+
+    @media (max-width: 480px) {
+      body { font-size: 15px; }
+      h1 { font-size: 2.6em; }
+      h2 { font-size: 2.2em; }
+      h3 { font-size: 1.9em; }
+      p { font-size: 0.95em; }
+      li { font-size: 1em; }
     }
 
     .slide {
-      width: 100vw;
-      min-height: 100dvh;
-      display: none;
-      flex-direction: column;
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: flex;
       justify-content: center;
       align-items: center;
-      padding: 2rem 1rem calc(2rem + env(safe-area-inset-bottom)) 1rem;
+      padding: 1.5rem;
       box-sizing: border-box;
+      transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.97);
+      z-index: 1;
     }
-    .slide.active { display: flex; }
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1);
+    }
 
-    .content {
-      background: var(--slide-bg);
-      padding: 2rem 2.5rem;
-      border-radius: 20px;
-      width: 95%;
-      max-width: 1000px;
-      height: auto;
-      max-height: 75vh;
-      margin-top: 40px;
+    .slide > div {
+      background: rgba(255, 255, 255, 0.06);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      max-height: 85%;
       overflow-y: auto;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-      animation: fadeIn 0.8s ease;
-      position: relative;
-      font-size: 0.95rem;
     }
 
-    /* --- Landscape fix --- */
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { opacity: 0; animation: fadeInUp 1s ease forwards; }
+    .slide.active .fade-in { animation-delay: 0.3s; }
+
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      animation: rise 12s linear infinite;
+      z-index: 0;
+    }
+    @keyframes rise {
+      0%   { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-110vh) scale(0.5); opacity: 0; }
+    }
+
+    /* ✅ Fix landscape agar slide panjang bisa scroll */
     @media (orientation: landscape) {
-      body { overflow: auto; }
+      body {
+        overflow: auto;
+      }
       .slide {
-        align-items: flex-start; /* biar konten mulai dari atas */
+        align-items: flex-start;
         justify-content: flex-start;
       }
-      .content {
-        max-height: none; /* jangan dibatasi */
+      .slide > div {
+        max-height: none;
         height: auto;
-        overflow-y: visible; /* scroll pakai body, bukan di dalam box */
-        margin-top: 80px; /* kasih spasi dari atas */
+        overflow-y: visible;
+        margin-top: 80px;
       }
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    h1, h2 { color: var(--gold); margin-bottom: .8rem; }
-    p, li { line-height: 1.6; margin-bottom: .5rem; }
-    b { color: var(--gold); }
-    ul, ol { margin-left: 1.2rem; margin-bottom: 1rem; }
   </style>
 </head>
 <body>
 
-  <!-- header -->
-  <div class="header">
-    Dipersembahkan oleh:<br>
-    <span class="brand">DV-Team Naga Persada</span>
+<div id="presentation-container" 
+  style="position: fixed; top:0; left:0; width:100vw; height:100vh; 
+  z-index: 9999; cursor: pointer; user-select:none;">
+
+  <!-- Gelembung background -->
+  <div id="bubbles"></div>
+
+  <!-- Header -->
+  <div style="position:absolute; top:1rem; right:1.5rem; z-index:10; text-align:right; color:rgba(255,255,255,0.7); font-size:1rem; line-height:1.3;">
+    dipersembahkan oleh<br><strong style="color:#f9fafb;">DVTeam Naga Persada</strong>
+  </div>
+
+  <!-- Semua slides (materi tetap sama persis dengan versi Anda) -->
+  <!-- Slide 0 -->
+  <div class="slide active">
+    <div class="text-center text-white max-w-4xl fade-in">
+      <h1>🌟 Coba Renungkan</h1>
+      <p class="mt-6">
+        Apakah anda tahu, seberapa besar potensi anda membangun <span class="text-sky-300 font-bold">komunitas investasi</span> di DV Team?<br><br>
+        Pernahkah anda membayangkan, berapa besar peluang anda untuk <span class="text-fuchsia-300 font-bold">sukses</span> bersama DV Team…?<br><br>
+        Bayangkan jika potensi itu benar-benar anda kelola dengan serius dan terarah, apa yang bisa anda capai dalam beberapa bulan ke depan?
+      </p>
+    </div>
   </div>
 
   <!-- Slide 1 -->
-  <div class="slide active">
-    <div class="content">
-      <h1>TEKNIK MENGUNDANG</h1>
-      <p><b>Kajian Ilmiah Perjalanan Hidup</b><br>DV-Team Naga Persada</p>
+  <div class="slide">
+    <div class="text-center text-white max-w-4xl fade-in">
+      <h2 class="text-fuchsia-300">🔑 Kuncinya Adalah</h2>
+      <p class="mt-6">
+        Untuk menjawab pertanyaan itu, kuncinya ada pada satu hal sederhana namun sangat menentukan:
+      </p>
+      <h3 class="mt-6 text-sky-300">➡️ Daftar Nama</h3>
+      <p class="mt-6">
+        Karena <strong>daftar nama adalah peta jalan</strong> menuju kesuksesan di DV Team.<br><br>
+        Semakin lengkap daftar nama anda, semakin besar peluang komunitas anda berkembang.<br>
+        Dan semakin berkembang komunitas anda, semakin nyata kesuksesan yang bisa anda raih bersama DV Team.
+      </p>
     </div>
   </div>
 
   <!-- Slide 2 -->
   <div class="slide">
-    <div class="content">
-      <h2>Pendahuluan</h2>
-      <p>Teknik mengundang adalah seni mengajak orang dengan cara elegan, tidak memaksa, dan membangun rasa ingin tahu. Materi ini disusun khusus untuk DV-Team Naga Persada.</p>
+    <div class="text-center text-white max-w-4xl fade-in">
+      <h1>📒 Apa itu Daftar Nama?</h1>
+      <p class="mt-6">
+        Daftar nama adalah catatan berisi orang-orang yang kita kenal dan mungkin bisa kita ajak bekerja sama, berdiskusi, atau ditawarkan sesuatu.<br><br>
+        Biasanya ditulis dalam buku, Excel, atau aplikasi, lengkap dengan <strong>nama, nomor kontak, dan catatan tambahan</strong>.
+      </p>
     </div>
   </div>
 
   <!-- Slide 3 -->
   <div class="slide">
-    <div class="content">
-      <h2>Prinsip Dasar</h2>
-      <ul>
-        <li>Jangan menggurui, tapi bercerita.</li>
-        <li>Bangun kedekatan emosional.</li>
-        <li>Pahami siapa yang diajak.</li>
-        <li>Ciptakan suasana santai.</li>
+    <div class="text-center text-white max-w-4xl fade-in">
+      <h2 class="text-fuchsia-300">🎯 Tujuan Daftar Nama</h2>
+      <ul class="mt-6 space-y-4 text-left mx-auto max-w-2xl">
+        <li>1️⃣ Sebagai panduan kerja → supaya kita tahu siapa saja yang perlu dihubungi.</li>
+        <li>2️⃣ Mengatur prioritas → membantu memilih orang yang paling berpotensi lebih dulu.</li>
+        <li>3️⃣ Menghindari lupa → semua orang yang kita kenal tercatat dengan rapi.</li>
       </ul>
     </div>
   </div>
 
   <!-- Slide 4 -->
   <div class="slide">
-    <div class="content">
-      <h2>Langkah 1 – Persiapan</h2>
-      <ol>
-        <li>Kenali target audiens.</li>
-        <li>Siapkan cerita menarik.</li>
-        <li>Gunakan bahasa sederhana.</li>
-      </ol>
+    <div class="text-center text-white max-w-4xl fade-in">
+      <h2 class="text-sky-300">🌟 Manfaat Daftar Nama</h2>
+      <ul class="mt-6 space-y-4 text-left mx-auto max-w-2xl">
+        <li>📞 Memudahkan komunikasi → tidak bingung mau menghubungi siapa.</li>
+        <li>🚀 Meningkatkan peluang sukses → semakin banyak nama, semakin besar peluang.</li>
+        <li>🌐 Membangun jaringan lebih luas → dari satu nama bisa kenal dengan orang lain.</li>
+        <li>📌 Membuat kerja lebih terarah → ada langkah jelas, tidak asal-asalan.</li>
+      </ul>
     </div>
   </div>
 
   <!-- Slide 5 -->
   <div class="slide">
-    <div class="content">
-      <h2>Langkah 2 – Cara Mengajak</h2>
-      <ul>
-        <li>Gunakan sapaan personal.</li>
-        <li>Sampaikan dengan senyum.</li>
-        <li>Berikan alasan kuat kenapa perlu hadir.</li>
-      </ul>
+    <div class="text-left text-white max-w-4xl fade-in">
+      <h2 class="text-fuchsia-300 text-center">📝 Cara Membuat Daftar Nama</h2>
+      <ol class="mt-6 space-y-4">
+        <li>1️⃣ Siapkan media → bisa buku catatan, file Excel, atau aplikasi di HP.</li>
+        <li>2️⃣ Tulis semua nama orang yang Anda kenal (keluarga, teman, tetangga, rekan kerja, sosial media).</li>
+        <li>3️⃣ Lengkapi dengan informasi penting: Nama, Nomor HP/WA, Hubungan, Catatan.</li>
+        <li>4️⃣ Beri kategori:
+          <br>🔹 A = Potensi besar
+          <br>🔹 B = Potensi sedang
+          <br>🔹 C = Potensi kecil
+        </li>
+        <li>5️⃣ Update secara rutin → tambahkan nama baru, tandai siapa yang sudah dihubungi.</li>
+      </ol>
     </div>
   </div>
 
   <!-- Slide 6 -->
   <div class="slide">
-    <div class="content">
-      <h2>Contoh Kalimat Ajak</h2>
-      <p>“Bro, ada sharing seru nih. Aku ikut, kayaknya kamu cocok banget deh. Yuk bareng?”</p>
-      <p>“Minggu depan ada kajian ringan. Aku pengen kamu ikut, biar kita bisa diskusi bareng.”</p>
+    <div class="text-center text-white max-w-4xl fade-in">
+      <h1>
+        👉 Daftar Nama itu ibarat <span class="text-sky-300">Peta Jalan</span>
+      </h1>
+      <p class="mt-6">
+        Tanpa peta, kita akan bingung arah.<br>
+        Dengan peta, kita bisa berjalan lebih teratur dan cepat sampai tujuan.<br><br>
+        Saatnya buat daftar nama anda, dan wujudkan kesuksesan bersama DV Team!
+      </p>
     </div>
   </div>
 
   <!-- Slide 7 -->
   <div class="slide">
-    <div class="content">
-      <h2>Hal yang Perlu Dihindari</h2>
-      <ul>
-        <li>Memaksa orang untuk hadir.</li>
-        <li>Memberikan kesan menggurui.</li>
-        <li>Terlalu panjang menjelaskan.</li>
-      </ul>
+    <div class="text-center text-white max-w-4xl fade-in">
+      <h2 class="text-fuchsia-300">🚀 Saatnya Bertindak!</h2>
+      <p class="mt-6">
+        Segera undang mereka untuk mendapatkan penjelasan yang <strong>utuh</strong> dari ketua tim Anda.<br><br>
+        Jangan tunggu lebih lama, karena kesuksesan komunitas Anda dimulai dari langkah pertama ini!
+      </p>
     </div>
   </div>
 
-  <!-- Slide 8 -->
-  <div class="slide">
-    <div class="content">
-      <h2>Kesimpulan</h2>
-      <p>Mengundang itu sederhana. Gunakan hati, sampaikan dengan tulus, dan berikan ruang untuk orang lain memilih.</p>
-    </div>
+  <!-- Navigasi -->
+  <div id="navigation-hint" style="position:fixed; bottom:1rem; right:1rem; z-index:10000; color:white; font-size:0.8rem; background-color:rgba(0,0,0,0.4); padding:5px 9px; border-radius:9999px; transition:opacity 0.5s;">
+    Klik atau sentuh untuk lanjut
   </div>
+</div>
 
-  <!-- script navigasi -->
-  <script>
-    let current = 0;
-    const slides = document.querySelectorAll(".slide");
-    let firstClick = false;
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const presentationContainer = document.getElementById('presentation-container');
+  const navigationHint = document.getElementById('navigation-hint');
+  let currentSlide = 0;
+  let firstClick = false;
 
-    function showSlide(i) {
-      slides.forEach((s, idx) => s.classList.toggle("active", idx === i));
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === index);
+    });
+  }
+
+  presentationContainer.addEventListener('click', () => {
+    if (!firstClick) {
+      firstClick = true;
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      } else if (document.documentElement.webkitRequestFullscreen) {
+        document.documentElement.webkitRequestFullscreen();
+      }
+      if (navigationHint) navigationHint.style.opacity = '0';
+      return;
     }
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  });
 
-    // tampilkan slide pertama saat awal
-    showSlide(current);
+  document.body.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    } else if (e.key === 'ArrowLeft') {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(currentSlide);
+    }
+  });
 
-    document.body.addEventListener("click", () => {
-      // klik pertama hanya fullscreen
-      if (!firstClick) {
-        firstClick = true;
-        if (document.documentElement.requestFullscreen) {
-          document.documentElement.requestFullscreen();
-        } else if (document.documentElement.webkitRequestFullscreen) {
-          document.documentElement.webkitRequestFullscreen();
-        }
-        return;
-      }
-      // klik berikutnya → pindah slide
-      current = (current + 1) % slides.length;
-      showSlide(current);
-    });
-
-    document.body.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowRight") {
-        current = (current + 1) % slides.length;
-      } else if (e.key === "ArrowLeft") {
-        current = (current - 1 + slides.length) % slides.length;
-      }
-      showSlide(current);
-    });
-  </script>
+  // Gelembung
+  const bubblesContainer = document.getElementById('bubbles');
+  for (let i = 0; i < 20; i++) {
+    const bubble = document.createElement('div');
+    const size = Math.random() * 40 + 10;
+    bubble.classList.add('bubble');
+    bubble.style.width = `${size}px`;
+    bubble.style.height = `${size}px`;
+    bubble.style.left = `${Math.random() * 100}vw`;
+    bubble.style.animationDuration = `${8 + Math.random() * 8}s`;
+    bubble.style.animationDelay = `${Math.random() * 5}s`;
+    bubblesContainer.appendChild(bubble);
+  }
+</script>
 
 </body>
 </html>
