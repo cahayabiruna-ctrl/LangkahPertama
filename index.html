@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Presentasi: Daftar Nama – Peta Jalan Sukses</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
     html, body {
@@ -51,18 +49,18 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 1.5rem; 
+      padding: 1.5rem;
       box-sizing: border-box;
       transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
-      opacity: 0; 
-      pointer-events: none; 
+      opacity: 0;
+      pointer-events: none;
       transform: scale(0.97);
       z-index: 1;
     }
-    .slide.active { 
-      opacity: 1; 
-      pointer-events: auto; 
-      transform: scale(1); 
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1);
     }
 
     .slide > div {
@@ -74,7 +72,7 @@
       overflow-y: auto;
     }
 
-    /* ✅ Tambahan agar slide panjang bisa discroll di landscape */
+    /* ✅ Landscape mode: slide panjang bisa scroll */
     @media (orientation: landscape) {
       body { overflow-y: auto; }
       .slide {
@@ -92,7 +90,6 @@
       }
     }
 
-    /* 🎈 Gelembung */
     .bubble {
       position: absolute;
       bottom: -100px;
@@ -121,9 +118,10 @@
     dipersembahkan oleh<br><strong style="color:#f9fafb;">DVTeam Naga Persada</strong>
   </div>
 
-  <!-- ✅ Slide 0 -->
+  <!-- ✅ Semua slide asli Anda tetap utuh -->
+  <!-- Slide 0 -->
   <div class="slide active">
-    <div class="text-center text-white max-w-4xl fade-in">
+    <div class="text-center text-white max-w-4xl">
       <h1>🌟 Coba Renungkan</h1>
       <p class="mt-6">
         Apakah anda tahu, seberapa besar potensi anda membangun <span class="text-sky-300 font-bold">komunitas investasi</span> di DV Team?<br><br>
@@ -135,7 +133,7 @@
 
   <!-- Slide 1 -->
   <div class="slide">
-    <div class="text-center text-white max-w-4xl fade-in">
+    <div class="text-center text-white max-w-4xl">
       <h2 class="text-fuchsia-300">🔑 Kuncinya Adalah</h2>
       <p class="mt-6">
         Untuk menjawab pertanyaan itu, kuncinya ada pada satu hal sederhana namun sangat menentukan:
@@ -151,7 +149,7 @@
 
   <!-- Slide 2 -->
   <div class="slide">
-    <div class="text-center text-white max-w-4xl fade-in">
+    <div class="text-center text-white max-w-4xl">
       <h1>📒 Apa itu Daftar Nama?</h1>
       <p class="mt-6">
         Daftar nama adalah catatan berisi orang-orang yang kita kenal dan mungkin bisa kita ajak bekerja sama, berdiskusi, atau ditawarkan sesuatu.<br><br>
@@ -162,7 +160,7 @@
 
   <!-- Slide 3 -->
   <div class="slide">
-    <div class="text-center text-white max-w-4xl fade-in">
+    <div class="text-center text-white max-w-4xl">
       <h2 class="text-fuchsia-300">🎯 Tujuan Daftar Nama</h2>
       <ul class="mt-6 space-y-4 text-left mx-auto max-w-2xl">
         <li>1️⃣ Sebagai panduan kerja → supaya kita tahu siapa saja yang perlu dihubungi.</li>
@@ -174,7 +172,7 @@
 
   <!-- Slide 4 -->
   <div class="slide">
-    <div class="text-center text-white max-w-4xl fade-in">
+    <div class="text-center text-white max-w-4xl">
       <h2 class="text-sky-300">🌟 Manfaat Daftar Nama</h2>
       <ul class="mt-6 space-y-4 text-left mx-auto max-w-2xl">
         <li>📞 Memudahkan komunikasi → tidak bingung mau menghubungi siapa.</li>
@@ -187,7 +185,7 @@
 
   <!-- Slide 5 -->
   <div class="slide">
-    <div class="text-left text-white max-w-4xl fade-in">
+    <div class="text-left text-white max-w-4xl">
       <h2 class="text-fuchsia-300 text-center">📝 Cara Membuat Daftar Nama</h2>
       <ol class="mt-6 space-y-4">
         <li>1️⃣ Siapkan media → bisa buku catatan, file Excel, atau aplikasi di HP.</li>
@@ -205,7 +203,7 @@
 
   <!-- Slide 6 -->
   <div class="slide">
-    <div class="text-center text-white max-w-4xl fade-in">
+    <div class="text-center text-white max-w-4xl">
       <h1>
         👉 Daftar Nama itu ibarat <span class="text-sky-300">Peta Jalan</span>
       </h1>
@@ -219,7 +217,7 @@
 
   <!-- Slide 7 -->
   <div class="slide">
-    <div class="text-center text-white max-w-4xl fade-in">
+    <div class="text-center text-white max-w-4xl">
       <h2 class="text-fuchsia-300">🚀 Saatnya Bertindak!</h2>
       <p class="mt-6">
         Segera undang mereka untuk mendapatkan penjelasan yang <strong>utuh</strong> dari ketua tim Anda.<br><br>
@@ -247,7 +245,6 @@
     slides[currentSlide].classList.add('active');
   };
 
-  // ✅ Klik pertama → aktifkan fullscreen
   const handleClick = () => {
     if (firstClick) {
       firstClick = false;
@@ -259,9 +256,7 @@
     } else {
       nextSlide();
     }
-    if (navigationHint) {
-      navigationHint.style.opacity = '0';
-    }
+    if (navigationHint) navigationHint.style.opacity = '0';
   };
 
   presentationContainer.addEventListener('click', handleClick);
