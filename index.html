@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Presentasi: Daftar Nama – Peta Jalan Sukses</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
     html, body {
       margin: 0; padding: 0;
       width: 100%; height: 100%;
-      overflow: hidden;
       background: #1e1b4b;
     }
     body {
@@ -18,12 +19,15 @@
       -webkit-tap-highlight-color: transparent;
       font-size: 17px;
       line-height: 1.7;
+      overflow: hidden;
     }
 
     h1 { font-size: 3.8em; font-weight: 900; }
     h2 { font-size: 3.2em; font-weight: 800; }
     h3 { font-size: 2.7em; font-weight: 800; }
-    p  { font-size: 1.1em; font-weight: 400; }
+
+    p { font-size: 1.1em; font-weight: 400; }
+
     li {
       font-size: 1.15em;
       font-weight: 600;
@@ -38,7 +42,7 @@
       h1 { font-size: 2.6em; }
       h2 { font-size: 2.2em; }
       h3 { font-size: 1.9em; }
-      p  { font-size: 0.95em; }
+      p { font-size: 0.95em; }
       li { font-size: 1em; }
     }
 
@@ -72,23 +76,20 @@
       overflow-y: auto;
     }
 
-    /* ✅ Landscape mode: slide panjang bisa scroll */
     @media (orientation: landscape) {
-      body { overflow-y: auto; }
-      .slide {
-        position: relative !important;
-        height: auto !important;
-        min-height: 100vh;
-        align-items: flex-start !important;
-        justify-content: flex-start !important;
-        padding-top: 2rem;
-      }
+      body { overflow: hidden; }
       .slide > div {
-        max-height: none !important;
-        height: auto !important;
-        overflow: visible !important;
+        max-height: 95%;
+        overflow-y: auto;
       }
     }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { opacity: 0; animation: fadeInUp 1s ease forwards; }
+    .slide.active .fade-in { animation-delay: 0.3s; }
 
     .bubble {
       position: absolute;
@@ -106,22 +107,16 @@
 </head>
 <body>
 
-<div id="presentation-container" 
-  style="position: fixed; top:0; left:0; width:100vw; height:100vh; 
-  z-index: 9999; cursor: pointer; user-select:none;">
-
-  <!-- Gelembung background -->
+<div id="presentation-container" style="position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:9999; cursor:pointer; user-select:none;">
   <div id="bubbles"></div>
 
-  <!-- Header -->
   <div style="position:absolute; top:1rem; right:1.5rem; z-index:10; text-align:right; color:rgba(255,255,255,0.7); font-size:1rem; line-height:1.3;">
     dipersembahkan oleh<br><strong style="color:#f9fafb;">DVTeam Naga Persada</strong>
   </div>
 
-  <!-- ✅ Semua slide asli Anda tetap utuh -->
   <!-- Slide 0 -->
   <div class="slide active">
-    <div class="text-center text-white max-w-4xl">
+    <div class="text-center text-white max-w-4xl fade-in">
       <h1>🌟 Coba Renungkan</h1>
       <p class="mt-6">
         Apakah anda tahu, seberapa besar potensi anda membangun <span class="text-sky-300 font-bold">komunitas investasi</span> di DV Team?<br><br>
@@ -133,7 +128,7 @@
 
   <!-- Slide 1 -->
   <div class="slide">
-    <div class="text-center text-white max-w-4xl">
+    <div class="text-center text-white max-w-4xl fade-in">
       <h2 class="text-fuchsia-300">🔑 Kuncinya Adalah</h2>
       <p class="mt-6">
         Untuk menjawab pertanyaan itu, kuncinya ada pada satu hal sederhana namun sangat menentukan:
@@ -149,7 +144,7 @@
 
   <!-- Slide 2 -->
   <div class="slide">
-    <div class="text-center text-white max-w-4xl">
+    <div class="text-center text-white max-w-4xl fade-in">
       <h1>📒 Apa itu Daftar Nama?</h1>
       <p class="mt-6">
         Daftar nama adalah catatan berisi orang-orang yang kita kenal dan mungkin bisa kita ajak bekerja sama, berdiskusi, atau ditawarkan sesuatu.<br><br>
@@ -160,7 +155,7 @@
 
   <!-- Slide 3 -->
   <div class="slide">
-    <div class="text-center text-white max-w-4xl">
+    <div class="text-center text-white max-w-4xl fade-in">
       <h2 class="text-fuchsia-300">🎯 Tujuan Daftar Nama</h2>
       <ul class="mt-6 space-y-4 text-left mx-auto max-w-2xl">
         <li>1️⃣ Sebagai panduan kerja → supaya kita tahu siapa saja yang perlu dihubungi.</li>
@@ -172,7 +167,7 @@
 
   <!-- Slide 4 -->
   <div class="slide">
-    <div class="text-center text-white max-w-4xl">
+    <div class="text-center text-white max-w-4xl fade-in">
       <h2 class="text-sky-300">🌟 Manfaat Daftar Nama</h2>
       <ul class="mt-6 space-y-4 text-left mx-auto max-w-2xl">
         <li>📞 Memudahkan komunikasi → tidak bingung mau menghubungi siapa.</li>
@@ -185,7 +180,7 @@
 
   <!-- Slide 5 -->
   <div class="slide">
-    <div class="text-left text-white max-w-4xl">
+    <div class="text-left text-white max-w-4xl fade-in">
       <h2 class="text-fuchsia-300 text-center">📝 Cara Membuat Daftar Nama</h2>
       <ol class="mt-6 space-y-4">
         <li>1️⃣ Siapkan media → bisa buku catatan, file Excel, atau aplikasi di HP.</li>
@@ -203,7 +198,7 @@
 
   <!-- Slide 6 -->
   <div class="slide">
-    <div class="text-center text-white max-w-4xl">
+    <div class="text-center text-white max-w-4xl fade-in">
       <h1>
         👉 Daftar Nama itu ibarat <span class="text-sky-300">Peta Jalan</span>
       </h1>
@@ -217,7 +212,7 @@
 
   <!-- Slide 7 -->
   <div class="slide">
-    <div class="text-center text-white max-w-4xl">
+    <div class="text-center text-white max-w-4xl fade-in">
       <h2 class="text-fuchsia-300">🚀 Saatnya Bertindak!</h2>
       <p class="mt-6">
         Segera undang mereka untuk mendapatkan penjelasan yang <strong>utuh</strong> dari ketua tim Anda.<br><br>
@@ -226,7 +221,7 @@
     </div>
   </div>
 
-  <!-- Navigasi hint -->
+  <!-- Navigasi -->
   <div id="navigation-hint" style="position:fixed; bottom:1rem; right:1rem; z-index:10000; color:white; font-size:0.8rem; background-color:rgba(0,0,0,0.4); padding:5px 9px; border-radius:9999px; transition:opacity 0.5s;">
     Klik atau sentuh untuk lanjut
   </div>
@@ -245,23 +240,23 @@
     slides[currentSlide].classList.add('active');
   };
 
-  const handleClick = () => {
+  presentationContainer.addEventListener('click', () => {
     if (firstClick) {
       firstClick = false;
       if (presentationContainer.requestFullscreen) {
         presentationContainer.requestFullscreen();
       } else if (presentationContainer.webkitRequestFullscreen) {
         presentationContainer.webkitRequestFullscreen();
+      } else if (presentationContainer.msRequestFullscreen) {
+        presentationContainer.msRequestFullscreen();
       }
     } else {
       nextSlide();
     }
     if (navigationHint) navigationHint.style.opacity = '0';
-  };
+  });
 
-  presentationContainer.addEventListener('click', handleClick);
-
-  // 🎈 Generate gelembung
+  // 🎈 Gelembung
   const bubblesContainer = document.getElementById('bubbles');
   for (let i=0; i<20; i++) {
     const bubble = document.createElement('div');
